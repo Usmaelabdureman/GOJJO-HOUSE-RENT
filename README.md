@@ -34,9 +34,9 @@ We have two Users in addition to the admin;
 
 |  Name                                                           | ID          | Section |
 | ----------------------------------------------------------------| ------------|---------|
-|  [ADDISU MOTORA](https://github.com/Usmaelabdureman)            | UGR/4230/12 |    1    |
+|  [ADDISU MOTORA](https://github.com/Adaaking)                   | UGR/4230/12 |    1    |
 |  [BENIYAM ALEMU](https://github.com/ben-on)                     | UGR/4689/12 |    1    |
-|  [MULUKEN HAKIM](linkedin.com/in/mulukenhakim)                  | UGR/1110/12 |    1    |
+|  [MULUKEN HAKIM](https://github.com/MuleHakim)                  | UGR/1110/12 |    1    |
 |  [NAOL AKLILU](https://github.com/NaolAklilu)                   | UGR/0207/12 |    2    |
 |  [USMAEL ABDURHAMAN](https://github.com/Usmaelabdureman)        | UGR/6575/12 |    2    |
 
