@@ -37,6 +37,7 @@ class UserProfile extends StatelessWidget {
                         children: const [
                           Text(
                             "Full Name: ",
+                            key: Key("fullname"),
                             style: TextStyle(),
                           ),
                           Text(
@@ -62,12 +63,14 @@ class UserProfile extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             ListTile(
-              leading: Icon(Icons.edit),
+              leading: Icon(Icons.edit,
+              key: Key("icons")),
               title: Text("Edit profile"),
               onTap: () => context.go('/user_profile/edit_profile'),
             ),
             ListTile(
-              leading: Icon(Icons.edit),
+              leading: Icon(Icons.edit,
+              key: Key("edit")),
               title: Text("Change password"),
               onTap: () {},
             ),
