@@ -1,10 +1,11 @@
 import 'package:bet_kray/Login/Screen/login_screen.dart';
 import 'package:bet_kray/Post/Repository/post_repository.dart';
 import 'package:bet_kray/Post/bloc/bloc.dart';
+import 'package:bet_kray/Post/screens/admin_post_list.dart';
 import 'package:bet_kray/Post/screens/index.dart';
+import 'package:bet_kray/Request/Screens/admin_request_list.dart';
 import 'package:bet_kray/Request/bloc_observer.dart';
 import 'package:bet_kray/User/bloc/user_bloc.dart';
-import 'package:bet_kray/utils/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'Login/UserRepository/user_repository.dart';
@@ -19,9 +20,10 @@ import 'Request/repository/request_repository.dart';
 import 'User/data_provider/user_data_provider.dart';
 import 'User/repository/user_repository.dart';
 import 'User/screens/index.dart';
+import 'common/screen/home.dart';
 
 void main() {
-   final LoginRepository loginRepository = LoginRepository();
+  final LoginRepository loginRepository = LoginRepository();
   final PostRepository postRepository = PostRepository(PostDataProvider());
   final RequestRepository requestRepository =
       RequestRepository(RequestDataProvider());
@@ -51,12 +53,7 @@ class GojjoApp extends StatelessWidget {
       : super(key: key);
 
   final _router = GoRouter(
-    initialLocation: '/login',
     routes: [
-      GoRoute(
-        path: '/login',
-        builder: (context, state) => const LoginUi(),
-        ),
       GoRoute(
           path: '/',
           builder: (context, state) => const MainPage(),
@@ -90,6 +87,13 @@ class GojjoApp extends StatelessWidget {
                       ),
                     ),
                   ),
+                  GoRoute(
+                    path: 'current_user_posts',
+                    pageBuilder: (context, state) => MaterialPage<void>(
+                      key: state.pageKey,
+                      child: const UserPostList(),
+                    ),
+                  ),
                 ]),
             GoRoute(
                 path: 'request_list',
@@ -118,22 +122,51 @@ class GojjoApp extends StatelessWidget {
                   ),
                 ]),
             GoRoute(
-              path: 'admin_request',
-              builder: (context, state) => const SignupScreen(),
-            ),
-            GoRoute(
-                path: 'profile',
-                builder: (context, state) => const UserProfile(),
+                path: 'admin_profile',
+                builder: (context, state) => AdminProfile(),
                 routes: [
-                  // GoRoute(
-                  //   path: 'edit_profile',
-                  //   pageBuilder: (context, state) => MaterialPage<void>(
-                  //     key: state.pageKey,
-                  //     child: EditUserProfile(
-                  //       user: state.extra,
-                  //     ),
-                  //   ),
-                  // ),
+                  GoRoute(
+                      path: 'admin_screen',
+                      builder: (context, state) => const AdminPage(),
+                      routes: [
+                        GoRoute(
+                          path: 'userlist',
+                          builder: (context, state) => const UserList(),
+                        ),
+                        GoRoute(
+                          path: 'postlist',
+                          builder: (context, state) =>
+                              const AdminPagePostList(),
+                        ),
+                        GoRoute(
+                          path: 'requestlist',
+                          builder: (context, state) =>
+                              const AdminPageRequestList(),
+                        ),
+                        GoRoute(
+                          path: 'edit_profile',
+                          pageBuilder: (context, state) => MaterialPage<void>(
+                            key: state.pageKey,
+                            child: EditUserProfile(
+                              user: state.extra,
+                            ),
+                          ),
+                        ),
+                      ]),
+                ]),
+            GoRoute(
+                path: 'user_profile',
+                builder: (context, state) => UserProfile(),
+                routes: [
+                  GoRoute(
+                    path: 'edit_profile',
+                    pageBuilder: (context, state) => MaterialPage<void>(
+                      key: state.pageKey,
+                      child: EditUserProfile(
+                        user: state.extra,
+                      ),
+                    ),
+                  ),
                 ])
           ]),
       GoRoute(
@@ -141,10 +174,11 @@ class GojjoApp extends StatelessWidget {
         builder: (context, state) => const SignupScreen(),
       ),
       GoRoute(
-        path: '/userlist',
-        builder: (context, state) => const UserList(),
+        path: '/login',
+        builder: (context, state) => const LoginUi(),
       ),
     ],
+    initialLocation: '/login',
   );
 
   @override
@@ -153,7 +187,8 @@ class GojjoApp extends StatelessWidget {
         providers: [
           BlocProvider<LoginBloc>(
             create: (context) {
-              return LoginBloc(loginRepository: loginRepository)..add(AppStarted());
+              return LoginBloc(loginRepository: loginRepository)
+                ..add(AppStarted());
             },
           ),
           BlocProvider<PostBloc>(
@@ -173,68 +208,10 @@ class GojjoApp extends StatelessWidget {
             },
           ),
         ],
-        // create: (create) =>
-        //     PostBloc(postRepository: postRepository)..add(PostLoad()),
         child: MaterialApp.router(
           routeInformationParser: _router.routeInformationParser,
           routerDelegate: _router.routerDelegate,
           debugShowCheckedModeBanner: false,
         ));
-  }
-}
-
-class MainPage extends StatefulWidget {
-  const MainPage({Key? key}) : super(key: key);
-
-  @override
-  State<MainPage> createState() => _MainPageState();
-}
-
-class _MainPageState extends State<MainPage> {
-  int selectedScreenIndex = 0;
-
-  static List<Widget> screens = <Widget>[
-    Home(),
-    RequestList(),
-    UserProfile(),
-  ];
-
-  void changeScreen(int index) {
-    setState(() {
-      selectedScreenIndex = index;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Gojjo"),
-        backgroundColor: Color.fromARGB(255, 112, 80, 67),
-        foregroundColor: Colors.white,
-      ),
-      drawer: const AppDrawer(),
-      body: screens[selectedScreenIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: Colors.green,
-        currentIndex: selectedScreenIndex,
-        onTap: changeScreen,
-        unselectedItemColor: Colors.black,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: "Home",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.post_add_outlined),
-            label: "request",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle),
-            label: "profile",
-          ),
-        ],
-      ),
-    );
   }
 }
