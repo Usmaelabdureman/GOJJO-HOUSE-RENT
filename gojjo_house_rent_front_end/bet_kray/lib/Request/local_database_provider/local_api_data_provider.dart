@@ -13,7 +13,7 @@ class RequestApiProvider {
 
     final response = await http.get(Uri.parse(url));
     return (response.body as List).map((request) {
-      DatabaseProvider.database.createRequest(UserRequest.fromJson(employee));
+      DatabaseProvider.database.createRequest(UserRequest.fromJson(request));
     }).toList();
 
   }
