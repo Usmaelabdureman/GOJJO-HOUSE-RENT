@@ -34,7 +34,6 @@ class DatabaseProvider {
 
   //insert reqeust to database
   Future<int> createRequest(UserRequest request) async {
-    await deleteAllRequest();
     final db = await database;
 
     final response = await db!.insert('request', request.toJson());
