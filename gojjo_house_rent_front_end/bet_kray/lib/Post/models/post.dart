@@ -19,7 +19,14 @@ class Post {
         city: json['city'],
         subcity: json['subcity'],
         price: json['price'],
-        description: json['description']
-       );
+        description: json['description']);
   }
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "city": city,
+        "subcity": subcity,
+        "price": price,
+        "description": description
+      };
 }
