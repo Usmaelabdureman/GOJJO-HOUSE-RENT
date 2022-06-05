@@ -105,10 +105,6 @@ class UserRequestList extends StatelessWidget {
                                         BlocProvider.of<RequestBloc>(context)
                                             .add(RequestDelete(
                                                 requests.elementAt(idx).id));
-                                        Navigator.of(context)
-                                            .pushNamedAndRemoveUntil(
-                                                UserRequestList.routeName,
-                                                (route) => false);
                                       },
                                       child: const Padding(
                                         padding: EdgeInsets.all(10.0),
@@ -149,13 +145,7 @@ class UserRequestList extends StatelessWidget {
           return const CircularProgressIndicator();
         },
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () => Navigator.of(context).pushNamed(
-      //     AddUpdateRequest.routeName,
-      //     arguments: RequestArgument(edit: false),
-      //   ),
-      //   child: const Icon(Icons.add),
-      // ),
+
     );
   }
 }

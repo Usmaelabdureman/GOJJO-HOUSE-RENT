@@ -20,4 +20,14 @@ class UserRequest{
         bedroom: json['bedroom'],
         description: json['description']);
     }
+
+
+    Map<String, dynamic> toJson() => {
+        "id": id,
+        "city": city,
+        "subcity": subcity,
+        "description": description,
+      };
+
+  static fromMap(first) {}
 }

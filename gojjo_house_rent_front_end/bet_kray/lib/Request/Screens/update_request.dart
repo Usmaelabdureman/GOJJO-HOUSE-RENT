@@ -85,7 +85,6 @@ class UpdateUserRequest extends StatelessWidget {
                 ),
                 const SizedBox(height: 10.0),
                 TextFormField(
-                  // initialValue: userRequest.description, n
                   controller: _descriptionController,
                   decoration: const InputDecoration(
                     border: UnderlineInputBorder(),
