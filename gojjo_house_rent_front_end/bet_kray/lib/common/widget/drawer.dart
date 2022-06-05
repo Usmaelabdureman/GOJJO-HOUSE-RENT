@@ -37,6 +37,7 @@ class AppDrawer extends StatelessWidget {
                         children: const [
                           Text(
                             "username: user",
+                            key: Key("user"),
                             style: TextStyle(
                                 color: Colors.white, letterSpacing: 1.1),
                           ),
@@ -87,7 +88,8 @@ class AppDrawer extends StatelessWidget {
                     onTap: () => context.go('/user_posts/add_post')),
                 ListTile(
                   title: const Text("Add request"),
-                  leading: const Icon(Icons.add),
+                  leading: const Icon(Icons.add,
+                  key: Key("icons"),),
                   onTap: () => context.go('/request_list/add_request'),
                 ),
               ],

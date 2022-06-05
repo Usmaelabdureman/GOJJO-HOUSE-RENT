@@ -7,13 +7,11 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   group("Request Form test ", () {
     testWidgets("finds textformfield widgets.", (WidgetTester tester) async {
-      const testKey = Key("textform");
+      // const testKey = Key("textform");
       await tester.pumpWidget(MaterialApp(
-        home: AddRequest(
-          key: testKey,
-        ),
+        home: AddRequest(),
       ));
-      expect(find.byKey(testKey), findsWidgets);
+      expect(find.text("Add new Request"), findsOneWidget);
     });
 
     testWidgets("finds multiple container widgets.",
@@ -44,15 +42,13 @@ void main() {
       expect(find.byType(GestureDetector), findsWidgets);
     });
 
-    testWidgets("finds singleChildScroll View Widget.",
+    testWidgets("finds singleChildScrollView Widget by type",
         (WidgetTester tester) async {
-      const testKey = Key("single");
+      // const testKey = Key("single");
       await tester.pumpWidget(MaterialApp(
-        home: AddRequest(
-          key: testKey,
-        ),
+        home: AddRequest(),
       ));
-      expect(find.byKey(testKey), findsWidgets);
+      expect(find.byType(SingleChildScrollView), findsWidgets);
     });
 
     testWidgets("finds Form widgets.", (WidgetTester tester) async {

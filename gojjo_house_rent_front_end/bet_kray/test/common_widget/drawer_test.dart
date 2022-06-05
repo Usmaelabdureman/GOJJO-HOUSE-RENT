@@ -15,7 +15,7 @@ void main() {
       expect(find.byType(Drawer),findsOneWidget);
     });
 
-    testWidgets("finding a circleAvatar widget by type", (WidgetTester tester) async {
+    testWidgets("finding an icon widget by type", (WidgetTester tester) async {
       // const testKey = Key("user");
       // Build an App with a gesture detector widget that displays the letter .
       await tester.pumpWidget(const MaterialApp(
@@ -25,7 +25,7 @@ void main() {
     });
 
 
- testWidgets("finding a user text", (WidgetTester tester) async {
+ testWidgets("finding a text by key", (WidgetTester tester) async {
       const testKey = Key("user");
       // Build an App with a gesture detector widget that displays the letter .
       await tester.pumpWidget(const MaterialApp(
@@ -51,7 +51,7 @@ void main() {
       await tester.pumpWidget(const MaterialApp(
         home: AppDrawer(),
       ));
-      expect(find.byKey(testKey),findsWidgets);
+      expect(find.byKey(testKey),findsOneWidget);
     });
 
     testWidgets("finding a column widget by type", (WidgetTester tester) async {
@@ -80,12 +80,12 @@ void main() {
       expect(find.byType(ListTile),findsWidgets);
     });
 
-     testWidgets("finding a login text widget by key", (WidgetTester tester) async {
+     testWidgets("finding a row widget by type", (WidgetTester tester) async {
       
       await tester.pumpWidget(const MaterialApp(
         home: AppDrawer(),
       ));
-      expect(find.byType(SizedBox),findsWidgets);
+      expect(find.byType(Row),findsWidgets);
     });
 
 
